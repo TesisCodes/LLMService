@@ -1,4 +1,3 @@
-import pdb
 from django.http import JsonResponse
 
 from Model.PreferenciasDTO import PreferenciasDTO
@@ -25,7 +24,6 @@ def prompt(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def insertarPreferencias(request):
-    pdb.set_trace()
     idUsuario = request.data.get("idUsuario")
     preferencias = request.data.get("prescripciones")
     if idUsuario and preferencias:

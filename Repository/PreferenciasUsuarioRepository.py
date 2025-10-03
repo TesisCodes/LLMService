@@ -1,5 +1,4 @@
 from django.db import connection
-from Model.TiposRango import TiposRango
 
 def insertarPreferencias(preferencias_list):
     if not preferencias_list:

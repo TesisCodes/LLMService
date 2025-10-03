@@ -1,7 +1,4 @@
 import pdb
-from tokenize import String
-
-from django.shortcuts import render
 from django.http import JsonResponse
 
 from Model.PreferenciasDTO import PreferenciasDTO

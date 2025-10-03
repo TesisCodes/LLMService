@@ -8,6 +8,8 @@ from Service import PreferenciasService as preferenciasService
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+import pdb
+
 from Model import globals
 
 # Create your views here.
@@ -16,6 +18,7 @@ from Model import globals
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def insertarPreferencias(request):
+    pdb.set_trace()
     idUsuario = request.data.get("idUsuario")
     preferencias = request.data.get("prescripciones")
     if idUsuario and preferencias:

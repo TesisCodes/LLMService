@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 from Model.PreferenciasDTO import PreferenciasDTO
-from Service.PromptService import obtenerRespuestaPrompt
 from Service import PreferenciasService as preferenciasService
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.permissions import IsAuthenticated
@@ -15,7 +14,7 @@ from Model import globals
 
 @csrf_exempt
 @api_view(['POST'])
-#@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def insertarPreferencias(request):
     idUsuario = request.data.get("idUsuario")
     preferencias = request.data.get("prescripciones")

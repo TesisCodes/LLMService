@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 
 import os
 import Config.eureka_client_setup
-import Model.globals
 
 from django.core.wsgi import get_wsgi_application
 

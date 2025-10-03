@@ -8,7 +8,7 @@ import torch
 
 class PromptcontrollerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Controller.promptController'
+    name = 'Controller.PromptController'
 
     def ready(self):
         globals.deepseek = OpenAI(api_key="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",

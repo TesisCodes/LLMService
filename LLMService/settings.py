@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c(_5@f)nsd+!xm0*+s$@a!p_zp8qq5j$j0x$uf&%oy88v)6o=y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['llm-service' ,'10.43.102.146', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Controller.promptController'
+    'Controller.PromptController'
 ]
 
 MIDDLEWARE = [
@@ -74,9 +74,19 @@ WSGI_APPLICATION = 'LLMService.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "ArgySpot",
+        "USER": "root",
+        "PASSWORD": "argydb123",
+        "HOST": "10.43.102.146",
+        "PORT": "3306",
+        "OPTIONS": {
+            "charset": "utf8mb4",
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+            "use_unicode": True,
+            "ssl": {"ssl_disabled": True},
+        },
     }
 }
 

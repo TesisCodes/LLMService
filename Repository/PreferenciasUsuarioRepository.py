@@ -1,0 +1,38 @@
+from django.db import connection
+from Model.TiposRango import TiposRango
+
+def insertarPreferencias(preferencias_list):
+    if not preferencias_list:
+        print("La lista está vacía, no se puede insertar.")
+        return False
+    idUsuario = preferencias_list[0].idUsuario
+    desactivarPreferencias(idUsuario)
+    valores = [
+        (p.idUsuario, p.idTipoRango, p.fecha, p.esActiva, p.idEjercicio)
+        for p in preferencias_list
+    ]
+    sql = """
+    INSERT INTO preferenciasusuario
+    (idUsuario, idTipoRango, fecha, esActiva, idEjercicio)
+    VALUES (%s, %s, %s, %s, %s)
+    """
+
+    with connection.cursor() as cur:
+        cur.executemany(sql, valores)
+        connection.commit()
+        print(f"{cur.rowcount} registros insertados")
+        if(cur.rowcount > 0):
+            return True
+        return False
+
+
+def desactivarPreferencias(idUsuario):
+    sql = """
+    UPDATE preferenciasusuario
+    SET esActiva = 0
+    WHERE idUsuario = %s and esActiva = 1
+    """
+    with connection.cursor() as cur:
+        cur.execute(sql, (idUsuario,))
+        connection.commit()
+        print(f"{cur.rowcount} registros actualizados a esActiva=0 para idUsuario={idUsuario}")

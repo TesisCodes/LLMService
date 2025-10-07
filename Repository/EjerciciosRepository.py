@@ -1,7 +1,7 @@
 from django.db import connection
 from Model.Ejercicios import Ejercicio
 
-def getTiposRango():
+def getEjercicios():
     sql = """
         SELECT *
         FROM ejercicios

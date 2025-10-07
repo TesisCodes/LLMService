@@ -1,5 +1,24 @@
 from django.db import connection
 
+from Model.PreferenciasUsuario import PreferenciasUsuario
+
+def getPreferencias(idUsuario):
+    sql = """
+            SELECT *
+            FROM preferenciasusuario
+            WHERE idUsuario = %s AND esActiva = 1
+            """
+    with connection.cursor() as cur:
+        cur.execute(sql, idUsuario)
+        filas = cur.fetchall()
+
+    if not filas:
+        return ""
+
+    preferencias = [PreferenciasUsuario(idTipoRango=f[2], idEjercicio=f[5]) for f in filas]
+    return preferencias
+
+
 def insertarPreferencias(preferencias_list):
     if not preferencias_list:
         print("La lista está vacía, no se puede insertar.")

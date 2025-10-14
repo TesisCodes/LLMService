@@ -1,0 +1,35 @@
+name: Deploy in machine
+
+#Al hacer push al main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    # pide un runner self-hosted con etiquetas. Ajusta etiquetas si usaste otras.
+    runs-on: [ llm, service ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Show runner info
+        run: |
+          echo "Runner: $RUNNER_NAME"
+          echo "Workspace: $GITHUB_WORKSPACE"
+          whoami
+          id
+
+      - name: Make deploy script executable
+        run: |
+          ls -la
+          chmod +x ./deploy-llm.sh
+
+      - name: Run deploy
+        # Ejecuta el deploy.sh que está en el repo (se ejecuta en la VM porque el runner está en la VM)
+        run: |
+          ./deploy-llm.sh

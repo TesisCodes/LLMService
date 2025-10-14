@@ -1,5 +1,9 @@
+import ast
+
 import requests
+
 from Model import globals
+import json
 
 def obtenerRecomendacion(idUsuario):
     globals.obtenerPreferenciasUsuario(idUsuario)
@@ -35,36 +39,46 @@ def obtenerRecomendacion(idUsuario):
         """
 
     prompt += """
-    Quiero que actúes como un **entrenador personal experto**.
+    Genera una respuesta en formato JSON **válido** (sin texto adicional antes ni después).
 
-    Da una **recomendación de entrenamiento breve, natural y motivadora**, 
-    sin mencionar análisis, información previa ni calentamientos.
+    El JSON debe tener exactamente esta estructura:
+    {
+      "recomendacionGeneral": "texto explicativo de alrededor de 300 tokens, con saltos de línea escapados (usa \\n, no los pongas directos)",
+      "ejercicioRecomendado": {
+        "explicación": "explicación clara y breve (máximo 6 líneas) sobre por qué se recomienda ese ejercicio, también con \\n escapados",
+        "nombre": "nombre exacto del ejercicio, debe coincidir exactamente con uno del catálogo de ejercicios proporcionado",
+        "idEjercicio": número entero que corresponda al id exacto del ejercicio en el catálogo
+      }
+    }
 
-    🚫 **Prohibido** usar frases como:
-    - "Basado en la información..."
-    - "Según los datos..."
-    - "Con base en la información que me has proporcionado..."
-    - "¿Trabajamos juntos...?"
-    - "Podemos trabajar juntos..."
-    - "Te ayudaré personalmente..."
-    - "Sigamos entrenando juntos..."
-    - "Te acompañaré en el proceso..."
+    ⚠️ Instrucciones obligatorias:
+    - Usa **solo** comillas dobles (`"`).
+    - Escapa correctamente los saltos de línea como `\\n`.
+    - **No incluyas texto fuera del JSON** (ni comentarios, ni texto adicional).
+    - **No uses comillas simples** en ningún lugar.
+    - El JSON debe ser **100 % válido y cargable con `json.loads()`** sin errores.
+    - El ejercicio recomendado **debe existir en el catálogo oficial de ejercicios**.
+    - La recomendación **debe basarse exclusivamente en el desempeño del usuario en la última semana**, tomando en cuenta:
+      - Su frecuencia y tipo de ejercicios realizados.
+      - Su rendimiento por articulación.
+      - Sus preferencias en tipos de rango de movimiento.
+      - Repeticiones correctas e incorrectas.
+      - Peso levantado.
+      - Las áreas que requieren mejora o refuerzo.
 
-    La recomendación debe centrarse **únicamente en el consejo práctico y profesional**, 
-    como si estuvieras hablando directamente con el deportista.
+    🧠 Detalles de redacción:
+    - **Háblale directamente al usuario en segunda persona** (“tú”, “te”, “tu”) como si fueras su entrenador personal.
+    - Usa un tono **cercano, motivador y profesional**.
+    - Divide las ideas con saltos de línea (`\\n\\n`) para separar logros, técnica, control de articulaciones, errores y motivación.
+    - Evita frases impersonales como “el usuario ha hecho” o “se recomienda”. En su lugar, di “has hecho”, “deberías”, “te recomiendo”, “mantén”.
+    - No menciones que el texto está en formato JSON ni hagas referencias al formato en la respuesta.
 
-    Debe basarse en:
-    - El tipo de rango
-    - El peso actual
-    - Las repeticiones correctas e incorrectas
+    📏 Restricciones:
+    - La “recomendacionGeneral” NO PUEDE SUPERAR LOS **300 tokens**.
+    - En "recomendaciónGeneral" **no** menciones el mismo ejercicio que aparece en "ejercicioRecomendado".
+    - “ejercicioRecomendado” debe complementar la recomendación con una explicación breve y clara (máximo 6 líneas).
 
-    Tono: profesional, empático y motivador.
-    
-    📏 **Extensión esperada**: La respuesta debe tener maximo 256 tokens.  
-    Debe ser un texto fluido, natural y sin cortarse abruptamente
-
-    Ejemplo de tono:
-    "Buen trabajo con las repeticiones. Ajusta un poco el peso para mantener una ejecución perfecta y evitar fatiga. Enfócate en mantener un rango de movimiento constante."
+    📦 Entrega únicamente el JSON final, sin ```json ni ``` al inicio o al final.
     """
     print(prompt)
 
@@ -75,10 +89,15 @@ def obtenerRecomendacion(idUsuario):
         "stream": False,
         "options": {
             "temperature": 0.3,
-            "num_predict": 256  # límite de tokens reducido
+            "num_predict": 700  # límite de tokens reducido
         }
     }
 
-    resp = requests.post(f"http://10.101.137.210:11434/api/chat", json=payload)
+    resp = requests.post(f"http://10.101.139.13:11434/api/chat", json=payload)
     print(resp.json()['message']['content'])
-    return resp.json()['message']['content']
+    try:
+        data = json.loads(resp.json()['message']['content'])
+    except (TypeError, ValueError) as e:
+        return "PreferenciasController"
+
+    return data

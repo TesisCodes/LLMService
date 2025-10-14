@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # ✅ usa Ubuntu, no tus runners personalizados (llm, service)
+    runs-on: [ llm, service ]  
 
     steps:
       # 1️⃣ Clonar el repositorio

@@ -11,40 +11,35 @@ jobs:
     runs-on: [ llm, service ]  
 
     steps:
-      # 1️⃣ Clonar el repositorio
+      # Clonar el repositorio
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2️⃣ Instalar dependencias del sistema necesarias para mysqlclient
-      - name: Install system dependencies
-        run: |
-          sudo apt-get install -y pkg-config default-libmysqlclient-dev build-essential
-
-      # 3️⃣ Configurar Python
+      # Configurar Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      # 4️⃣ Instalar dependencias del proyecto
+      # 4Instalar dependencias del proyecto
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest pytest-django
 
-      # 5️⃣ Ejecutar migraciones
+      # Ejecutar migraciones
       - name: Run migrations
         run: |
           python manage.py migrate --noinput
 
-      # 6️⃣ Ejecutar tests con salida JUnit XML
+      # Ejecutar tests con salida JUnit XML
       - name: Run Django tests
         run: |
           mkdir -p test-results
           pytest --ds=LLMService.settings --junitxml=test-results/junit.xml --maxfail=5 --disable-warnings -v
 
-      # 7️⃣ Publicar resumen visual bonito
+      # Publicar resumen visual bonito
       - name: 📊 Publish JUnit Test Report
         uses: mikepenz/action-junit-report@v4
         with:

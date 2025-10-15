@@ -4,7 +4,7 @@ import psutil
 # Dirección del servidor Eureka
 EUREKA_SERVER = "http://10.43.102.146:8761/eureka/"
 
-# Registrar el microservicio
+# Registrarlo
 eureka_client.init(
     eureka_server=EUREKA_SERVER,
     app_name="llm-service",      # Nombre de tu servicio

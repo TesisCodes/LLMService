@@ -22,6 +22,6 @@ from Controller.RecomendacionController import views as recomendacion
 
 urlpatterns = [
     #    path('admin/', admin.site.urls),
-    path('preferencias/', views.insertarPreferencias, name='insertarPreferencias'),
-    path('recomendacion/', recomendacion.obtenerRecomendacion, name='recomendacion'),
+    path('preferencias/<str:idUsuario>/', views.insertarPreferencias, name='insertarPreferencias'),
+    path('recomendacion/<str:idUsuario>/', recomendacion.obtenerRecomendacion, name='recomendacion'),
 ]

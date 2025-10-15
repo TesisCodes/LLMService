@@ -11,9 +11,8 @@ from Service import PreferenciasService as preferenciasService
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def insertarPreferencias(request):
-    idUsuario = request.data.get("idUsuario")
-    preferencias = request.data.get("prescripciones")
+def insertarPreferencias(request , idUsuario: str):
+    preferencias = request.GET.get("prescripciones")
     if idUsuario and preferencias:
         preferenciasDTO = PreferenciasDTO(idUsuario, preferencias)
         data = preferenciasService.insertarPreferencias(preferenciasDTO.idUsuario, preferenciasDTO.preferencias)

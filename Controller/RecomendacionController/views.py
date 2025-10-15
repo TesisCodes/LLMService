@@ -7,8 +7,7 @@ import Service.RecomendacionService as recomendacionService
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def obtenerRecomendacion(request):
-    idUsuario = request.data.get("idUsuario")
+def obtenerRecomendacion(request, idUsuario: str):
     if idUsuario:
         data = recomendacionService.obtenerRecomendacion(idUsuario)
         if data == "PreferenciasController":
@@ -16,6 +15,5 @@ def obtenerRecomendacion(request):
         if data == "":
             return JsonResponse("internal server error", safe=False, status=500)
         return JsonResponse(data, safe=False, status=200)
-
     else:
         return JsonResponse({"error": "Debe enviar el parámetro 'idUsuario'"}, status=400)

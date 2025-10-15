@@ -12,7 +12,7 @@ from Service import PreferenciasService as preferenciasService
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def insertarPreferencias(request , idUsuario: str):
-    preferencias = request.GET.get("prescripciones")
+    preferencias = request.data.get("prescripciones")
     if idUsuario and preferencias:
         preferenciasDTO = PreferenciasDTO(idUsuario, preferencias)
         data = preferenciasService.insertarPreferencias(preferenciasDTO.idUsuario, preferenciasDTO.preferencias)

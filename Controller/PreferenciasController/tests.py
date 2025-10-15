@@ -90,9 +90,8 @@ class preferenciasControllerTest(TestCase):
 
     def test_insertarPreferencias(self):
         # Suponiendo que tu view tiene un nombre en urls.py
-        url = reverse('insertarPreferencias')
+        url = reverse('insertarPreferencias', args=[self.idUsuario])
         payload = {
-            "idUsuario":  self.idUsuario,
             "prescripciones": self.prescripciones
         }
         from rest_framework.test import APIClient

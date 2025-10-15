@@ -10,7 +10,7 @@ eureka_client.init(
     eureka_server=EUREKA_SERVER,
     app_name="llm-service",      # Nombre de tu servicio
     instance_port=8001,        # Puerto de Django
-    instance_host=IP_VPN, # Host de la instancia
+    host_name=IP_VPN, # Host de la instancia
     prefer_ip=True,
     renewal_interval_in_secs=10,
     duration_in_secs=30,

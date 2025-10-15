@@ -12,26 +12,19 @@ jobs:
     runs-on: [llm, service, windows]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - name: Show runner info
         run: |
           Write-Host "Runner: $env:RUNNER_NAME"
           Write-Host "Workspace: $env:GITHUB_WORKSPACE"
           whoami
-        shell: pwsh
+        shell: powershell
 
       - name: Make deploy script executable
-        # En Windows no hace falta chmod, pero verifica que sea .ps1
         run: |
           Get-ChildItem .\deploy-llm.ps1
-        shell: pwsh
+        shell: powershell
 
       - name: Run deploy
-        # Ejecuta el script PowerShell
         run: |
           .\deploy-llm.ps1
-        shell: pwsh
+        shell: powershell

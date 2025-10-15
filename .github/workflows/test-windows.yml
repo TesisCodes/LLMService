@@ -32,13 +32,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest pytest-django
-        shell: bash  # Cambiar a pwsh si runner es Windows
+        shell: powershell # Cambiar a pwsh si runner es Windows
 
       # Ejecutar migraciones
       - name: Run migrations
         run: |
           python manage.py migrate --noinput
-        shell: bash
+        shell: powershell
 
       # Crear carpeta de resultados y ejecutar tests
       - name: Run Django tests
@@ -52,7 +52,7 @@ jobs:
             --junitxml=test-results/junit.xml \
             --maxfail=5 \
             --disable-warnings -v
-        shell: pwsh  # usar bash si runner es Linux/macOS
+        shell: powershell  # usar bash si runner es Linux/macOS
 
       # Publicar resumen visual bonito
       - name: 📊 Publish JUnit Test Report

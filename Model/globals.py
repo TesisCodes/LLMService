@@ -7,6 +7,7 @@ preferencias_json = []
 articulaciones_json = []
 estadisticas_ejercicios_json = []
 estadisticas_articulaciones_json = []
+ip = "10.101.138.234"
 
 import json
 import sys

@@ -32,8 +32,7 @@ def insertarPreferencias(idUsuario, prescripciones):
             "num_predict": 512  # suficiente para toda la lista JSON
         }
     }
-
-    resp = requests.post(f"http://localhost:11434/api/chat", json=payload)
+    resp = requests.post(f"http://{globals.ip}:11434/api/chat", json=payload)
     print(resp.json()['message']['content'])
 
     try:

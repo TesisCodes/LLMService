@@ -1,5 +1,4 @@
 from py_eureka_client import eureka_client
-import psutil
 
 # Dirección del servidor Eureka
 EUREKA_SERVER = "http://10.43.102.146:8761/eureka/"

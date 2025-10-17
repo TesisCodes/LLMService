@@ -10,7 +10,7 @@ def insertarPreferencias(idUsuario, prescripciones):
     prompt = (
          f"A partir del estado físico: '{prescripciones}', "
          f"asigna un 'idTipoRango' de {globals.tiposRango_json} "
-         f"a TODOS los {globals.ejercicios_json.__sizeof__()} ejercicios en {globals.ejercicios_json}. "
+         f"a TODOS los ejercicios en {globals.ejercicios_json}. "
          f"Ten en cuenta lo siguiente: "
          f"- Mientras más grande sea el valor de 'idTipoRango', más difícil o exigente es el ejercicio. "
          f"- Si el estado físico indica dolor o problema en alguna articulación o musculo involucrada en un ejercicio, "

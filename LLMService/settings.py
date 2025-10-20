@@ -79,7 +79,7 @@ DATABASES = {
         "NAME": "ArgySpot",
         "USER": "root",
         "PASSWORD": "argydb123",
-        "HOST": "10.43.102.146",
+        "HOST": "argy-db",
         "PORT": "3306",
         "OPTIONS": {
             "charset": "utf8mb4",
@@ -142,7 +142,7 @@ REST_FRAMEWORK = {
 }
 
 KEYCLOAK_CONFIG = {
-    "SERVER_URL": "http://10.43.102.146:9090/",
+    "SERVER_URL": "http://eureka:9090/",
     "REALM": "master",
     "CLIENT_ID": "hpe-service",
     "VERIFY_SSL": False,

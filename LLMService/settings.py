@@ -142,7 +142,7 @@ REST_FRAMEWORK = {
 }
 
 KEYCLOAK_CONFIG = {
-    "SERVER_URL": "http://keycloak:9090/",
+    "SERVER_URL": "http://keycloak:8080/",
     "REALM": "master",
     "CLIENT_ID": "hpe-service",
     "VERIFY_SSL": False,

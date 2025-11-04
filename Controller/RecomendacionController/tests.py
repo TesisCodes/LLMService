@@ -42,7 +42,7 @@ class recomendacionControllerTest(TestCase):
                                        )
                            """)
             cursor.execute("""INSERT IGNORE INTO usuarios (id)
-                                VALUES ('e8ee7728-7492-4c89-89ad-00af4d879c8b')
+                                VALUES ('557e4293-92c7-4c84-b12c-438811a35a57')
                                        """)
             cursor.execute("""
                     CREATE TABLE IF NOT EXISTS tiposrango (
@@ -127,8 +127,8 @@ class recomendacionControllerTest(TestCase):
 
     def setUp(self):
         # Crear datos de prueba
-        #auth_url = "http://10.43.102.146:8080/authservice/user"
-        auth_url = "http://api-gateway:8080/authservice/user"
+        auth_url = "http://10.43.102.146:8080/authservice/user"
+        #auth_url = "http://api-gateway:8080/authservice/user"
         self.prescripciones = "Tengo dolor de rodilla"
         correo = "majo"
         contrasenia = "pass123"

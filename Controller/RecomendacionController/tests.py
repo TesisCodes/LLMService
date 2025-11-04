@@ -9,7 +9,7 @@ import json
 import requests
 from django.db import connection
 
-class preferenciasControllerTest(TestCase):
+class recomendacionControllerTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         ejercicios_data = [
@@ -129,7 +129,6 @@ class preferenciasControllerTest(TestCase):
         # Crear datos de prueba
         #auth_url = "http://10.43.102.146:8080/authservice/user"
         auth_url = "http://api-gateway:8080/authservice/user"
-        self.idUsuario = "e8ee7728-7492-4c89-89ad-00af4d879c8b"
         self.prescripciones = "Tengo dolor de rodilla"
         correo = "majo"
         contrasenia = "pass123"
@@ -139,6 +138,7 @@ class preferenciasControllerTest(TestCase):
         }
         response = requests.get(auth_url, params=params)
         if response.status_code == 200:
+            self.idUsuario = response.json().get("usuario").get("id")
             self.token = response.json().get("accessToken")  # Ajusta según el JSON que devuelva
             print("Token:", self.token)
         else:

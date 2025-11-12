@@ -31,7 +31,7 @@ class preferenciasControllerTest(TestCase):
                                            prescripciones VARCHAR(200)
                                        )
                            """)
-            cursor.execute("""INSERT IGNORE INTO usuarios (id)
+            cursor.execute("""INSERT IGNORE INTO usuarios (id, prescripciones)
                                 VALUES ('d48c2bb2-8943-45fa-87bc-af63129f3bf8', 'ninguna')
                                        """)
             cursor.execute("""

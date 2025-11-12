@@ -43,7 +43,7 @@ class recomendacionControllerTest(TestCase):
                                        )
                            """)
             cursor.execute("""INSERT IGNORE INTO usuarios (id, prescripciones)
-                                VALUES ('d48c2bb2-8943-45fa-87bc-af63129f3bf8', 'dolor de rodilla')
+                                VALUES ('d48c2bb2-8943-45fa-87bc-af63129f3bf9', 'dolor de rodilla')
                                        """)
             cursor.execute("""
                     CREATE TABLE IF NOT EXISTS tiposrango (
@@ -139,7 +139,7 @@ class recomendacionControllerTest(TestCase):
         }
         response = requests.get(auth_url, params=params)
         if response.status_code == 200:
-            self.idUsuario = 'd48c2bb2-8943-45fa-87bc-af63129f3bf8'
+            self.idUsuario = 'd48c2bb2-8943-45fa-87bc-af63129f3bf9'
             self.token = response.json().get("accessToken")  # Ajusta según el JSON que devuelva
             print("Token:", self.token)
         else:

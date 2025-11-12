@@ -39,10 +39,11 @@ class recomendacionControllerTest(TestCase):
             cursor.execute("""
                                        CREATE TABLE IF NOT EXISTS usuarios (
                                            id VARCHAR(200) PRIMARY KEY
+                                           prescripciones VARCHAR(200)
                                        )
                            """)
-            cursor.execute("""INSERT IGNORE INTO usuarios (id)
-                                VALUES ('d48c2bb2-8943-45fa-87bc-af63129f3bf8')
+            cursor.execute("""INSERT IGNORE INTO usuarios (id, prescripciones)
+                                VALUES ('d48c2bb2-8943-45fa-87bc-af63129f3bf8', 'dolor de rodilla')
                                        """)
             cursor.execute("""
                     CREATE TABLE IF NOT EXISTS tiposrango (

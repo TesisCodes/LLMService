@@ -10,7 +10,7 @@ from Repository import EstadisticasEjercicioUsuarioRepository as estadisticasEje
 from Repository import EstadisticasArticulacionUsuarioRepository as estadisticasArticulacionUsuarioRepository
 from Repository import UsuarioRepository as usuarioRepository
 
-HF_TOKEN = "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"
+HF_TOKEN = "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"
 
 client = OpenAI(
     base_url="https://router.huggingface.co/v1",

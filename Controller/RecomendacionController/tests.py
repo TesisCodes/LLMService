@@ -128,8 +128,8 @@ class recomendacionControllerTest(TestCase):
 
     def setUp(self):
         # Crear datos de prueba
-        auth_url = "http://10.43.102.146:8080/authservice/user"
-        #auth_url = "http://api-gateway:8080/authservice/user"
+        #auth_url = "http://10.43.102.146:8080/authservice/user"
+        auth_url = "http://api-gateway:8080/authservice/user"
         self.prescripciones = "Tengo dolor de rodilla"
         correo = "majo"
         contrasenia = "pass123"

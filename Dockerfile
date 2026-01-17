@@ -41,4 +41,4 @@ RUN apt-get update && apt-get install -y default-mysql-client
 EXPOSE 8001
 
 # Comando por defecto para correr la app con gunicorn
-ENTRYPOINT ["/wait-for-mysql.sh", "argy-db", "gunicorn", "LLMService.wsgi:application", "--bind", "0.0.0.0:8001", "--workers", "1"]
+ENTRYPOINT ["argy-db", "gunicorn", "LLMService.wsgi:application", "--bind", "0.0.0.0:8001", "--workers", "1"]

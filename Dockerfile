@@ -34,8 +34,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiamos el proyecto
 COPY .. .
-COPY wait-for-mysql.sh /wait-for-mysql.sh
-RUN chmod +x /wait-for-mysql.sh
 
 RUN apt-get update && apt-get install -y default-mysql-client
 
